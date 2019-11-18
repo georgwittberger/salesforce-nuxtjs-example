@@ -1,0 +1,24 @@
+{
+  "name": "salesforce-nuxtjs-example",
+  "version": "1.0.0",
+  "description": "Example project of a Nuxt.js app powered by Salesforce data",
+  "author": "Georg Wittberger <georg.wittberger@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "generate": "nuxt-ts generate"
+  },
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^0.2.4",
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "nuxt": "^2.10.2",
+    "vue-property-decorator": "^8.3.0"
+  },
+  "devDependencies": {
+    "@nuxt/typescript-build": "^0.3.4",
+    "prettier": "^1.19.1"
+  }
+}
