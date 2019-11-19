@@ -1,14 +1,10 @@
 import Product from './product'
+import loadProductsFromSalesforce from './products-loader'
 
 let products: Product[] = []
 
 export async function loadProducts(): Promise<void> {
-  products = [
-    { id: '1', name: 'Banana' },
-    { id: '2', name: 'Peach' },
-    { id: '3', name: 'Strawberry' },
-    { id: '4', name: 'Ananas' }
-  ]
+  products = await loadProductsFromSalesforce()
 }
 
 export function getAllProducts(): Product[] {

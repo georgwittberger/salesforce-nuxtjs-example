@@ -6,7 +6,7 @@
     </p>
     <ul>
       <li v-for="product in products" :key="product.id">
-        <nuxt-link :to="`/products/${product.id}`">{{ product.name }}</nuxt-link>
+        <nuxt-link :to="`/products/${product.id}`"> {{ product.name }} ({{ product.id }})</nuxt-link>
       </li>
     </ul>
   </div>

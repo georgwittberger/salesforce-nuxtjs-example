@@ -1,22 +1,31 @@
-# salesforce-nuxtjs-example
+# Salesforce Nuxt.js Example
 
-> Example project for a Nuxt.js app powered by Salesforce data
+> Example project of a Nuxt.js app powered by Salesforce data
 
-## Build Setup
+## Running the Application
 
-``` bash
-# install dependencies
-$ yarn install
+1. Install [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/).
+2. Open a terminal in the project directory and install the dependencies.
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+   ```bash
+   yarn install
+   ```
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+3. Set the username and password (incl. security token) of a Salesforce user as environment variables. These credentials are used to query product data from the Salesforce org.
 
-# generate static project
-$ yarn generate
-```
+   ```bash
+   SF_USERNAME={username}
+   SF_PASSWORD={password}{security token}
+   ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+4. Run the application in development mode.
+
+   ```bash
+   yarn dev
+   ```
+
+5. Open the browser on <http://localhost:3000>
+
+## License
+
+[MIT](https://opensource.org/licenses/MIT)

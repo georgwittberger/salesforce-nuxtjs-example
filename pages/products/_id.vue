@@ -1,6 +1,8 @@
 <template>
   <div v-if="product">
     <h1>{{ product.name }}</h1>
+    <p>Code: {{ product.id }}</p>
+    <p>{{ product.description }}</p>
     <p>
       <nuxt-link to="/products">Back to Product Catalog</nuxt-link>
     </p>
