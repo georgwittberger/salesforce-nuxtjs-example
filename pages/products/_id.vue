@@ -9,17 +9,18 @@
 
 <script lang="ts">
 import axios from 'axios'
-import { Vue, Component } from 'vue-property-decorator'
+import Vue from 'vue'
 
-@Component({
+export default Vue.extend({
+  data() {
+    return { product: null }
+  },
+
   async asyncData({ env, params }) {
     const { data } = await axios.get(`${env.apiBaseUrl}/products/${params.id}`)
     return { product: data }
   }
 })
-export default class ProductList extends Vue {
-  product = null
-}
 </script>
 
 <style></style>

@@ -1,5 +1,5 @@
+import productsPrefetcher from './modules/products-prefetcher'
 import productsApi from './server/products/products-api'
-import startupCallback from './server/startup-callback'
 
 module.exports = {
   mode: 'universal',
@@ -34,23 +34,17 @@ module.exports = {
    */
   plugins: [],
   /*
-   * Nuxt.js dev-modules
+   * Nuxt.js build modules
    */
   buildModules: ['@nuxt/typescript-build'],
   /*
-   * Nuxt.js modules
+   * Nuxt.js runtime modules
    */
-  modules: [],
+  modules: [productsPrefetcher],
   /*
    * Build configuration
    */
   build: {},
-  /*
-   * Nuxt.js hooks
-   */
-  hooks: {
-    listen: startupCallback
-  },
   /*
    * Server middleware
    */
