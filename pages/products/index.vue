@@ -13,7 +13,6 @@
 </template>
 
 <script lang="ts">
-import axios from 'axios'
 import Vue from 'vue'
 
 export default Vue.extend({
@@ -21,8 +20,8 @@ export default Vue.extend({
     return { products: [] }
   },
 
-  async asyncData({ env }) {
-    const { data } = await axios.get(`${env.apiBaseUrl}/products`)
+  async asyncData({ $axios }) {
+    const { data } = await $axios.get('/products')
     return { products: data }
   }
 })

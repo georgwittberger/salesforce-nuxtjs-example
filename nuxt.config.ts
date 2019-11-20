@@ -1,5 +1,10 @@
-import productsPrefetcher from './modules/products-prefetcher'
-import productsApi from './server/products/products-api'
+import cookieSession from 'cookie-session'
+import { OAuth2Config, OAuth2Module } from './modules/oauth2'
+import { ProductsApiConfig, ProductsApiModule } from './modules/products-api'
+import { ProductsPrefetchingConfig, ProductsPrefetchingModule } from './modules/products-prefetch'
+import { UsersApiConfig, UsersApiModule } from './modules/users-api'
+
+const apiPrefix = process.env.API_PREFIX || '/api'
 
 module.exports = {
   mode: 'universal',
@@ -26,9 +31,7 @@ module.exports = {
   /*
    * Client-side environment variables
    */
-  env: {
-    apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3000/api'
-  },
+  env: {},
   /*
    * Plugins to load before mounting the App
    */
@@ -40,7 +43,31 @@ module.exports = {
   /*
    * Nuxt.js runtime modules
    */
-  modules: [productsPrefetcher],
+  modules: [
+    '@nuxtjs/axios',
+    [
+      OAuth2Module,
+      {
+        authorizationURL: process.env.SALESFORCE_AUTH_URL,
+        tokenURL: process.env.SALESFORCE_TOKEN_URL,
+        userInfoURL: process.env.SALESFORCE_USER_INFO_URL,
+        clientID: process.env.SALESFORCE_CLIENT_ID,
+        clientSecret: process.env.SALESFORCE_CLIENT_SECRET
+      } as OAuth2Config
+    ],
+    [
+      ProductsPrefetchingModule,
+      {
+        username: process.env.SALESFORCE_USERNAME,
+        password: process.env.SALESFORCE_PASSWORD
+      } as ProductsPrefetchingConfig
+    ],
+    [ProductsApiModule, { prefix: apiPrefix } as ProductsApiConfig],
+    [UsersApiModule, { prefix: apiPrefix } as UsersApiConfig]
+  ],
+  axios: {
+    prefix: apiPrefix
+  },
   /*
    * Build configuration
    */
@@ -48,5 +75,10 @@ module.exports = {
   /*
    * Server middleware
    */
-  serverMiddleware: [{ path: '/api/products', handler: productsApi }]
+  serverMiddleware: [
+    cookieSession({
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      keys: [process.env.COOKIE_KEY || 'topsecret']
+    })
+  ]
 }

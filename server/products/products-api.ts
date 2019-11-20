@@ -1,7 +1,7 @@
 import express from 'express'
 import { getAllProducts, getProductById } from './products-store'
 
-const productsApi = express()
+export const productsApi = express()
 
 productsApi.get('/', (request, response) => {
   response.status(200).json(getAllProducts())
@@ -12,5 +12,3 @@ productsApi.get('/:id', (request, response) => {
   if (product) response.status(200).json(product)
   else response.status(404)
 })
-
-export default productsApi

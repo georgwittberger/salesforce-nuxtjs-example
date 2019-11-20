@@ -1,10 +1,10 @@
 import Product from './product'
-import loadProductsFromSalesforce from './products-loader'
+import { getProducts, ProductsAdapterConfig } from './products-adapter'
 
 let products: Product[] = []
 
-export async function loadProducts(): Promise<void> {
-  products = await loadProductsFromSalesforce()
+export async function loadProducts(config: ProductsAdapterConfig): Promise<void> {
+  products = await getProducts(config)
 }
 
 export function getAllProducts(): Product[] {

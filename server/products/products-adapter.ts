@@ -1,15 +1,21 @@
 import jsforce, { QueryResult } from 'jsforce'
 import Product from './product'
 
-export default async function loadProductsFromSalesforce(): Promise<Product[]> {
-  if (!process.env.SF_USERNAME || !process.env.SF_PASSWORD) {
-    throw new Error(
-      'Salesforce username or password missing! Please set the environment variables SF_USERNAME and SF_PASSWORD properly.'
-    )
+export interface ProductsAdapterConfig {
+  username: string
+  password: string
+}
+
+export async function getProducts(config: ProductsAdapterConfig): Promise<Product[]> {
+  if (!config.username) {
+    throw new Error('Username missing in products adapter configuration')
+  }
+  if (!config.password) {
+    throw new Error('Password missing in products adapter configuration')
   }
 
   const connection = new jsforce.Connection({})
-  await connection.login(process.env.SF_USERNAME, process.env.SF_PASSWORD)
+  await connection.login(config.username, config.password)
 
   const productsResult = await new Promise<QueryResult<Product2>>((resolve, reject) => {
     connection.query<Product2>(
